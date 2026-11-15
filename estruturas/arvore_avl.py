@@ -1,3 +1,5 @@
+from estruturas.no import No
+
 class ArvoreAVL:
 
     def __init__(self):
@@ -80,7 +82,6 @@ class ArvoreAVL:
 
     def _inserir(self, no, tarefa):
         if no is None:
-            from estruturas.no import No
             return No(tarefa)
 
         if self.chave(tarefa) < self.chave(no.tarefa):
@@ -91,6 +92,55 @@ class ArvoreAVL:
             return no
 
         return self.balancear(no)
+
+    
+    def remover(self, identificador):
+        self.raiz = self._remover(self.raiz, identificador)
+
+    def _remover(self, no, identificador):
+        if no is None:
+            return None
+
+        # Procura a tarefa pelo identificador
+        if identificador < no.tarefa.identificador:
+            no.esquerda = self._remover(
+                no.esquerda, identificador
+            )
+
+        elif identificador > no.tarefa.identificador:
+            no.direita = self._remover(
+                no.direita, identificador
+            )
+
+        else:
+            # Caso 1 e 2: nó sem filho ou com apenas um filho
+            if no.esquerda is None:
+                return no.direita
+
+            elif no.direita is None:
+                return no.esquerda
+
+            # Caso 3: nó com dois filhos
+            sucessor = self._menor_no(no.direita)
+
+            no.tarefa = sucessor.tarefa
+
+            no.direita = self._remover(
+                no.direita,
+                sucessor.tarefa.identificador
+            )
+
+        # Atualiza a altura e realiza o balanceamento
+        return self.balancear(no)
+
+    def _menor_no(self, no):
+        atual = no
+
+        while atual.esquerda is not None:
+            atual = atual.esquerda
+
+        return atual
+
 
     def buscar(self, identificador):
         return self._buscar(self.raiz, identificador)
@@ -144,3 +194,16 @@ class ArvoreAVL:
 
     def quantidade(self):
         return len(self.em_ordem())
+
+    
+    def atualizar_prioridade(self, identificador, nova_prioridade):
+        tarefa = self.buscar(identificador)
+
+        if tarefa is None:
+            return False
+
+        self.remover(identificador)
+        tarefa.prioridade = nova_prioridade
+        self.inserir(tarefa)
+
+        return True
