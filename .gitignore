@@ -1,0 +1,31 @@
+
+# Ambiente virtual
+.venv/
+venv/
+env/
+
+__pycache__/
+*.py[cod]
+
+# Arquivos temporários
+*.log
+.DS_Store
+
+# Configurações locais do VS Code
+.vscode/
+
+# Configurações e segredos do Streamlit
+.streamlit/secrets.toml
+
+# Arquivos de banco de dados
+*.db
+*.sqlite
+*.sqlite3
+
+# Arquivos de ambiente
+.env
+.env.*
+
+# Cobertura de testes
+.coverage
+htmlcov
