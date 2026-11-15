@@ -1,3 +1,4 @@
+
 from tarefa import Tarefa
 from estruturas.arvore_avl import ArvoreAVL
 
@@ -14,3 +15,18 @@ for tarefa in tarefas:
     arvore.inserir(tarefa)
 
 print("Tarefas antes da remoção:")
+
+for tarefa in arvore.em_ordem():
+    print(tarefa)
+
+print("\nRemovendo tarefa de ID 2...")
+resultado = arvore.remover(2)
+print("Remoção realizada:", resultado)
+
+print("\nTarefas depois da remoção:")
+
+for tarefa in arvore.em_ordem():
+    print(tarefa)
+
+print("\nMaior prioridade:")
+print(arvore.maior_prioridade())

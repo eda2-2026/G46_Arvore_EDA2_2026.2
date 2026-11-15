@@ -95,7 +95,49 @@ class ArvoreAVL:
 
     
     def remover(self, identificador):
-        self.raiz = self._remover(self.raiz, identificador)
+        tarefa = self.buscar(identificador)
+
+        if tarefa is None:
+            return False
+
+        self.raiz = self._remover_chave(
+            self.raiz, self.chave(tarefa)
+        )
+
+        return True
+    
+    def _remover_chave(self, no, chave):
+        if no is None:
+            return None
+
+        chave_atual = self.chave(no.tarefa)
+
+        if chave < chave_atual:
+            no.esquerda = self._remover_chave(
+                no.esquerda, chave
+            )
+
+        elif chave > chave_atual:
+            no.direita = self._remover_chave(
+                no.direita, chave
+            )
+
+        else:
+            if no.esquerda is None:
+                return no.direita
+
+            elif no.direita is None:
+                return no.esquerda
+
+            sucessor = self._menor_no(no.direita)
+            no.tarefa = sucessor.tarefa
+
+            no.direita = self._remover_chave(
+                no.direita,
+                self.chave(sucessor.tarefa)
+            )
+
+        return self.balancear(no)
 
     def _remover(self, no, identificador):
         if no is None:
