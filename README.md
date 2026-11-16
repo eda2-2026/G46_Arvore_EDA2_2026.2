@@ -8,6 +8,7 @@ O projeto foi desenvolvido para a disciplina de Estrutura de Dados e Algoritmos 
 
 **Acesse a aplicação:** [TaskTree AVL — Aplicação Web](https://g46arvoreeda220262-3zwszhx6drs4awb8372gun.streamlit.app)
 
+**Acesse o vídeo:** [Youtube](https://youtu.be/4OCEhKe-Jp4)
 ## ✨ Funcionalidades
 
 - **Cadastro de tarefas:** criação de tarefas com nome, descrição e prioridade.
